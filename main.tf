@@ -24,22 +24,26 @@ resource "tfe_workspace" "main" {
   }
 }
 
-resource "github_branch" "main" {
-  repository = github_repository.main.name
-  branch     = "main"
-}
-
-resource "github_branch_default" "default" {
-  repository = github_repository.main.name
-  branch     = github_branch.main.branch
-}
-
 resource "github_repository" "main" {
   name        = "${var.use_case_name}-${var.environment}"
   description = "Terraform Consumer Repo for ${var.use_case_name}-${var.environment}"
 
   visibility = "public"
+  template {
+    owner      = "miles-test-repo-tf-builds"
+    repository = "repo-template-terraform-azure"
+  }
 }
+
+# resource "github_branch" "main" {
+#   repository = github_repository.main.name
+#   branch     = "main"
+# }
+
+# resource "github_branch_default" "default" {
+#   repository = github_repository.main.name
+#   branch     = github_branch.main.branch
+# }
 
 resource "tfe_variable" "aws_access_key" {
   key          = "AWS_ACCESS_KEY_ID"
