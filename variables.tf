@@ -8,3 +8,7 @@ variable "creator_workspace" {}
 variable "tfe_team_developers_id" {}
 variable "tfe_team_ops_id" {}
 variable "environment" {}
+variable "arm_client_id" {}
+variable "arm_client_secret" {}
+variable "arm_tenant_id" {}
+variable "arm_subscription_id" {}

@@ -11,10 +11,10 @@ resource "tfe_team_access" "main-ops" {
 }
 
 resource "tfe_workspace" "main" {
-  name         = "${var.use_case_name}-${var.environment}"
-  organization = var.org
-  auto_apply   = true
-  queue_all_runs = false
+  name              = "${var.use_case_name}-${var.environment}"
+  organization      = var.org
+  auto_apply        = true
+  queue_all_runs    = false
   terraform_version = "1.0.8"
 
   vcs_repo {
@@ -113,8 +113,8 @@ resource "tfe_variable" "environment_name" {
 }
 
 resource "tfe_variable" "name" {
-  key      = "name"
-  value    = var.use_case_name
-  category = "terraform"
+  key          = "name"
+  value        = var.use_case_name
+  category     = "terraform"
   workspace_id = tfe_workspace.main.id
 }
