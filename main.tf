@@ -19,9 +19,19 @@ resource "tfe_workspace" "main" {
 
   vcs_repo {
     branch         = "main"
-    identifier     = var.vcs_identifier
+    identifier     = "milesjh/${github_repository.main.name}"
     oauth_token_id = var.oauth_token
   }
+}
+
+resource "github_branch" "main" {
+  repository = github_repository.main.name
+  branch     = "main"
+}
+
+resource "github_branch_default" "default" {
+  repository = github_repository.main.name
+  branch     = github_branch.main.branch
 }
 
 resource "github_repository" "main" {
